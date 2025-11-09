@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: aws-sns
+  cloud:
+    aws:
+      region:
+        static: ${AWS_REGION}
+      credentials:
+        access-key: ${ACCESS_KEY}
+        secret-key: ${SECRET_KEY}
+    sns:
+      topic:
+        arn: arn:aws:sns:${AWS_REGION}:${ACCOUNT_ID}:${SNS_TOPIC}
+  main:
+    banner-mode: off
+
+server:
+  port: 5000
+
+logging:
+  level:
+    root: info

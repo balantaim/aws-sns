@@ -49,5 +49,4 @@ public class SubscriptionServiceImpl implements SmsSubscription, EmailSubscripti
     }
 
 
-
 }

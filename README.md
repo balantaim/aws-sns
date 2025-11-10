@@ -31,8 +31,6 @@ This Spring Boot application demonstrates how to integrate **Amazon Simple Notif
 - [ ] Platform application endpoint
 - [ ] Amazon Kinesis Data Firehose
 
-
-
 ## Setup cloud environment
 
 1. **Create an IAM Group**
@@ -89,7 +87,7 @@ logging:
 ### Key Properties
 
 | Property     | Description                                   | Example        |
-| ------------ | --------------------------------------------- | -------------- |
+|--------------|-----------------------------------------------|----------------|
 | `AWS_REGION` | The AWS region where your SNS topic is hosted | `eu-central-1` |
 | `ACCESS_KEY` | Your IAM user’s AWS access key                | `AKIA...`      |
 | `SECRET_KEY` | Your IAM user’s AWS secret key                | `abcd1234...`  |

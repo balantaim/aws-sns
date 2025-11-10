@@ -95,7 +95,7 @@ logging:
 | `SNS_TOPIC`  | The name of your SNS topic                    | `my-sns-topic` |
 
 > [!WARNING]
-> **Security Note:** Do not hardcode credentials in your configuration file. Use environment variables or AWS Secrets Manager for better security.
+> Do not hardcode credentials in your configuration file. Use environment variables or AWS Secrets Manager for better security.
 
 ---
 
@@ -146,7 +146,7 @@ curl -X POST "http://localhost:5000/sms/+359XXXXXXXXX/Hello"
 ```
 
 > [!IMPORTANT]
-> Subscribed emails and phone numbers myst be verified manually!
+> Subscribed emails and phone numbers must be verified manually!
 
 ### Logging
 

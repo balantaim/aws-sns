@@ -4,4 +4,6 @@ public interface SmsSubscription {
 
     void subscribeMobileNumber(String phone);
 
+    boolean unsubscribe(String phone);
+
 }

@@ -9,7 +9,7 @@ import software.amazon.awssdk.services.sns.model.PublishResponse;
 
 @Slf4j
 @Service
-public class NotificationServiceImpl implements EmailNotification, SmsNotification {
+public class NotificationService implements EmailNotification, SmsNotification {
 
     /**
      * Use Async SnsClient instead of SnsTemplate in order to reduce the jar size
@@ -19,16 +19,16 @@ public class NotificationServiceImpl implements EmailNotification, SmsNotificati
     private final SnsClient snsClient;
     private final String TOPIC_ARN;
 
-    public NotificationServiceImpl(SnsClient snsClient,
-                                   // SnsTemplate snsTemplate,
-                                   @Value("${spring.cloud.sns.topic.arn}") String TOPIC_ARN) {
+    public NotificationService(SnsClient snsClient,
+                               // SnsTemplate snsTemplate,
+                               @Value("${spring.cloud.sns.topic.arn}") String TOPIC_ARN) {
         // this.snsTemplate = snsTemplate;
         this.snsClient = snsClient;
         this.TOPIC_ARN = TOPIC_ARN;
     }
 
     @Override
-    public void sendEmailNotification(final String message) {
+    public void sendNotification(final String message) {
         snsClient.publish(request -> request
                 .topicArn(TOPIC_ARN)
                 .message(message)

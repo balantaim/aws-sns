@@ -14,6 +14,11 @@ spring:
   main:
     banner-mode: off
 
+app:
+  phone:
+    # ISO country code
+    default-region: BG
+
 server:
   port: 5000
 

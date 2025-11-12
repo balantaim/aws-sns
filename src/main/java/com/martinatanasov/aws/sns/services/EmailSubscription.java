@@ -4,4 +4,6 @@ public interface EmailSubscription {
 
     void subscribeEmail(String email);
 
+    boolean unsubscribe(String email);
+
 }

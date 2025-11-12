@@ -6,7 +6,7 @@ This Spring Boot application demonstrates how to integrate **Amazon Simple Notif
 
 ### Software and Requirements
 
-**Tools:** Java, Spring, Lombok, Maven, AWS cloud and SNS
+**Tools:** Java, Spring, Lombok, Maven, Google's libphonenumber, AWS cloud and SNS
 
 **Requirements:**
 
@@ -76,6 +76,10 @@ spring:
   main:
     banner-mode: off
 
+app:
+  phone:
+    default-region: BG
+
 server:
   port: 5000
 
@@ -121,34 +125,59 @@ Server starts at: `http://localhost:5000`
 
 ## Testing the Application
 
-Subscribe email for notifications:
+Send a notification to all subscribers (including phone numbers):
+
+```bash
+curl -X POST "http://localhost:5000/send-notification/HelloSubscribers"
+```
+
+**Email:**
+
+* Subscribe email for notifications:
 
 ```bash
 curl -X POST "http://localhost:5000/subscribe-email/test-email@gmail.com"
 ```
 
-Send a notification to all subscribers:
+* Unsubscribe email:
 
 ```bash
-curl -X POST "http://localhost:5000/send-email/HelloSubscribers"
+curl -X DELETE "http://localhost:5000/unsubscribe-email/test-email@gmail.com"
 ```
 
-Subscribe phone number for SMS notifications:
+**Phone number:**
+
+* Subscribe phone number for SMS notifications:
 
 ```bash
 curl -X POST "http://localhost:5000/subscribe-phone/+359XXXXXXXXX"
 ```
 
-Send an SMS to a specific phone number with a custom message:
+* Send an SMS to a specific phone number with a custom message:
 
 ```bash
 curl -X POST "http://localhost:5000/sms/+359XXXXXXXXX/Hello"
 ```
 
+* Unsubscribe phone number:
+
+```bash
+curl -X DELETE "http://localhost:5000/unsubscribe-phone/+359XXXXXXXXX"
+```
+
 > [!IMPORTANT]
 > Subscribed emails and phone numbers must be verified manually!
+> Phone numbers should start with `+359` for region: `BG`
+
+### Run tests
+
+Execute Unit testing via Mockito:
+
+```bash
+mvn test
+```
 
 ### Logging
 
 * Default log level: `info`
-* Banner disabled for clean console output
+* Banner disabled

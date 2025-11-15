@@ -4,6 +4,8 @@
 
 This Spring Boot application demonstrates how to integrate **Amazon Simple Notification Service (SNS)** with a **Spring Cloud AWS** application. It allows sending and subscribing to notifications via **Email** and **SMS** protocols using configurable AWS credentials and region properties.
 
+### [Source Code License](LICENSE)
+
 ### Software and Requirements
 
 **Tools:** Java, Spring, Lombok, Maven, Google's libphonenumber, AWS cloud and SNS
@@ -125,6 +127,12 @@ Server starts at: `http://localhost:5000`
 
 ## Testing the Application
 
+**Via Intellij's Http Client:**
+
+* [Http client resources](requests/requests.http)
+
+**Via Curl:**
+
 Send a notification to all subscribers (including phone numbers):
 
 ```bash
@@ -181,3 +189,9 @@ mvn test
 
 * Default log level: `info`
 * Banner disabled
+
+### Intellij's http client CLI
+
+**Guide:** [http client CLI guide](https://www.jetbrains.com/help/idea/http-client-cli.html)
+
+**Source:** [http client CLI source files](https://www.jetbrains.com/ijhttp/download/?section=zip-archive)

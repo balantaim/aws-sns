@@ -49,14 +49,16 @@ public class MessageController {
     // Unsubscribe Email
     @DeleteMapping("/unsubscribe-email/{email}")
     public ResponseEntity<String> unsubscribeEmail(@PathVariable String email) {
-        boolean isUnsubscribed = false;
+        boolean isUnsubscribed;
         if (emailValidator.isEmailValid(email)) {
             isUnsubscribed = subscriptionService.unsubscribe(email);
+        } else {
+            return new ResponseEntity<>("Invalid email!", HttpStatus.BAD_REQUEST);
         }
         if (isUnsubscribed) {
             return new ResponseEntity<>("Email unsubscribed!", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Invalid email!", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("No subscription found!", HttpStatus.BAD_REQUEST);
     }
 
     // Phone
@@ -83,14 +85,16 @@ public class MessageController {
     // Unsubscribe phone number
     @DeleteMapping("/unsubscribe-phone/{phone}")
     public ResponseEntity<String> unsubscribePhone(@PathVariable String phone) throws NumberParseException {
-        boolean isUnsubscribed = false;
+        boolean isUnsubscribed;
         if (phoneNumberUtil.isValidNumber(phoneNumberUtil.parse(phone, DEFAULT_REGION))) {
             isUnsubscribed = subscriptionService.unsubscribe(phone);
+        } else {
+            return new ResponseEntity<>("Invalid phone!", HttpStatus.BAD_REQUEST);
         }
         if (isUnsubscribed) {
             return new ResponseEntity<>("Phone number unsubscribed!", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Invalid phone!", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("No subscription found!", HttpStatus.BAD_REQUEST);
     }
 
     private boolean isMessageValid(final String message) {

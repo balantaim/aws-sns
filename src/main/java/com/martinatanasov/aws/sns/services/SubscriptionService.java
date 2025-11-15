@@ -37,35 +37,27 @@ public class SubscriptionService implements SmsSubscription, EmailSubscription {
 
     @Override
     public boolean unsubscribe(final String endpoint) {
-        try {
-            // List all subscriptions for the topic
-            String nextToken = null;
-            do {
-                ListSubscriptionsByTopicResponse response = snsClient.listSubscriptionsByTopic(ListSubscriptionsByTopicRequest.builder()
-                        .topicArn(TOPIC_ARN)
-                        .nextToken(nextToken)
-                        .build());
+        // List all subscriptions for the topic
+        String nextToken = null;
+        do {
+            ListSubscriptionsByTopicResponse response = snsClient.listSubscriptionsByTopic(ListSubscriptionsByTopicRequest.builder()
+                    .topicArn(TOPIC_ARN)
+                    .nextToken(nextToken)
+                    .build());
 
-                for (Subscription sub : response.subscriptions()) {
-                    if (endpoint.equalsIgnoreCase(sub.endpoint())) {
-                        snsClient.unsubscribe(UnsubscribeRequest.builder()
-                                .subscriptionArn(sub.subscriptionArn())
-                                .build());
-                        log.info("Successfully unsubscribed: {}", endpoint);
-                        return true;
-                    }
+            for (Subscription sub : response.subscriptions()) {
+                if (endpoint.equalsIgnoreCase(sub.endpoint())) {
+                    snsClient.unsubscribe(UnsubscribeRequest.builder()
+                            .subscriptionArn(sub.subscriptionArn())
+                            .build());
+                    log.info("Successfully unsubscribed: {}", endpoint);
+                    return true;
                 }
-                nextToken = response.nextToken();
-            } while (nextToken != null);
-            log.info("No subscription found for endpoint: {}", endpoint);
-            return false;
-        } catch (SnsException e) {
-            log.error("SNS error: {}", e.awsErrorDetails().errorMessage());
-            return false;
-        } catch (Exception e) {
-            log.error("Unexpected error: {}", e.getMessage());
-            return false;
-        }
+            }
+            nextToken = response.nextToken();
+        } while (nextToken != null);
+        log.info("No subscription found for endpoint: {}", endpoint);
+        return false;
     }
 
     private SubscribeRequest subscribeRequest(final String subscriber, final String protocolTypeValue) {

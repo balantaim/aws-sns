@@ -1,0 +1,32 @@
+
+# Send a notification to all subscribers (including phone numbers):
+POST http://localhost:5000/send-notification/HelloSubscribers
+
+###
+
+# **Email:**
+# * Subscribe email for notifications:
+POST http://localhost:5000/subscribe-email/test-email@gmail.com
+
+###
+
+# * Unsubscribe email:
+DELETE http://localhost:5000/unsubscribe-email/test-email@gmail.com
+
+###
+
+# **Phone number:**
+# * Subscribe phone number for SMS notifications:
+POST http://localhost:5000/subscribe-phone/+359XXXXXXXXX
+
+###
+
+# * Send an SMS to a specific phone number with a custom message:
+POST http://localhost:5000/sms/+359XXXXXXXXX/Hello
+
+###
+
+# * Unsubscribe phone number:
+DELETE http://localhost:5000/unsubscribe-phone/+359XXXXXXXXX
+
+###
